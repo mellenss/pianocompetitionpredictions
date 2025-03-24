@@ -1,0 +1,89 @@
+---
+title: "tchaikvis"
+author: "Melody Qian"
+date: "2025-03-16"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+tchaik <- read.csv('/Users/melodyqian/Documents/GitHub/pianocompetitionpredictions/tchaikovskycompetition/TchaikovskyCompetitionCSV.csv')
+```
+
+```{r}
+tchaik$R1CompF <- as.factor(tchaik$R1Composer)
+levels(tchaik$R1CompF)
+levels(tchaik$R1CompF) <- c("NA", "Tchaikovsky", "Liszt", "Chopin", "Tchaikovsky", "Rachmaninoff", "Mozart", "Liszt", "Liszt", "Schubert", "Chopin", "Chopin", "Chopin", "Bach", "Bach", "Bach", "Haydn", "Haydn", "Haydn","Beethoven", "Beethoven", "Beethoven", "Clementi", "Clementi", "Tchaikovsky", "Tchaikovsky", "Tchaikovsky", "Tchaikovsky/Pletnev", "Tchaikovsky/Wild", "Tchaikovsky/Pletnev", "Tchaikovsky/Pletnev", "Rachmaninoff", "Rachmaninoff", "Rachmaninoff", "Jagd", "Jagd", "Mozart", "Mozart")
+
+```
+
+```{r}
+R1CompTable <- table(tchaik$R1CompF) 
+print(R1CompTable)# Create frequency table  
+R1CompTable <- R1CompTable[names(R1CompTable)!='NA']
+print(sum(R1CompTable))# Remove NA values 
+R1CompProp <- R1CompTable/ sum(R1CompTable)
+print(R1CompProp)
+R1CompSortProp <- sort(R1CompProp, decreasing = TRUE)  
+print(R1CompSortProp)
+top10r1<- head(R1CompSortProp,10)
+par(mar = c(5, 40, 4, 0))
+barplot(top10r1, horiz = TRUE, las=1, cex.names=0.6, xlim = c(0, 0.20), main="Proportion Composers Round 1, Top 10", col="steelblue") 
+```
+
+```{r}
+tchaik$R2Last <- sapply(strsplit(as.character(tchaik$R2Composer), " "), function(x) if (length(x) > 0) tail(x, 1) else NA, USE.NAMES = FALSE)
+
+tchaik$R2CompF <- as.factor(tchaik$R2Last)
+levels(tchaik$R2CompF)
+levels(tchaik$R2CompF)[1] <- "NA"
+levels(tchaik$R2CompF)[35] <- "Rachmaninoff"
+
+```
+
+```{r}
+R2CompTable <- table(tchaik$R2CompF)  # Create frequency table  
+R2CompTable <- R2CompTable[names(R2CompTable)!='NA']  # Remove NA values
+print(sort(R2CompTable))
+R2CompProp <- R2CompTable/ sum(R2CompTable)
+print(R2CompProp)
+R2CompSortProp <- sort(R2CompProp, decreasing=TRUE)
+print(R2CompSortProp)
+top10r2=head(R2CompSortProp,10 )
+print(top10r2)
+barplot(top10r2, horiz = TRUE, las=1, cex.names=0.6, xlim=c(0,.13), main="Proportion Composers Round 2, Top 10", col="steelblue") 
+```
+
+```{r}
+tchaik$R3CompF <- as.factor(tchaik$R3Composer)
+levels(tchaik$R3CompF)
+levels(tchaik$R3CompF) <- c("NA", "Scriabin", "Rachmaninoff", "Mozart", "Grieg", "Brahms","Rachmaninoff","Mozart","Beethoven","Bartók","Britten","Saint-Saëns","Grieg","Liszt","Chopin","Chopin","Brahms","Brahms","Beethoven","Beethoven","Beethoven","Beethoven","Beethoven","Ravel","Medtner","Tchaikovsky","Tchaikovsky","Tchaikovsky","Prokofiev","Prokofiev","Prokofiev","Rachmaninoff","Rachmaninoff","Rachmaninoff","Prokofiev","Mozart")
+```
+
+```{r}
+R3CompTable <- table(tchaik$R3CompF) 
+print(R1CompTable)# Create frequency table  
+R3CompTable <- R3CompTable[names(R3CompTable)!='NA']
+print(sum(R3CompTable))# Remove NA values 
+R3CompProp <- R3CompTable/ sum(R3CompTable)
+print(R1CompProp)
+R3CompSortProp <- sort(R3CompProp, decreasing = TRUE)  
+top10r3<- head(R3CompSortProp,10)
+print(top10r3)
+par(mar = c(5, 40, 4, 0))
+barplot(top10r3, horiz = TRUE, las=1, cex.names=0.6, xlim = c(0, 0.7), main="Proportion Composers Round 3, Top 10", col="steelblue") 
+
+```
+```{r}
+tchaik$CountryF <- as.factor(tchaik$ParticipantCountry)
+levels(tchaik$CountryF)[18] <- "UK"
+levels(tchaik$CountryF)[11] <- "Korea"
+countryftable <- table(tchaik$CountryF)
+countryproptable <- countryftable/sum(countryftable)
+countryproptable <- sort(countryproptable, decreasing=TRUE)
+barplot(countryproptable, horiz = TRUE, las=1, cex.names=0.6, xlim = c(0, 0.45), main="Competitor Country of Origin", col="coral")
+```
+
