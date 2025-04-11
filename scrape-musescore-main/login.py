@@ -5,8 +5,8 @@ import os, time
 def login(driver):
     load_dotenv()
 
-    username = os.getenv("MUSESCORE_USERNAME")
-    password = os.getenv("MUSESCORE_PASSWORD")
+    username = "pianoellenfor"
+    password = "Mouse24##w"
 
     url = "https://musescore.com/user/login"
     driver.uc_open(url)
