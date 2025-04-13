@@ -13,13 +13,13 @@ def download(driver, url):
         EC.element_to_be_clickable(
             (
                 By.XPATH,
-                "/html/body/div[1]/div[1]/section/aside/div[1]/div[2]/section/button[1]",
+                "/html/body/div[1]/div[1]/section/aside/div[1]/div/section/button[1]",
             )
         )
     )
     download_btn = driver.find_element(
         By.XPATH,
-        "/html/body/div[1]/div[1]/section/aside/div[1]/div[2]/section/button[1]",
+        "/html/body/div[1]/div[1]/section/aside/div[1]/div/section/button[1]",
     )
 
     # Scroll into view and click via JS
