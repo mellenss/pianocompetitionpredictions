@@ -15,7 +15,6 @@ note_durations = {
     'whole': 4
 }
 def analyze(filepath):
-    filepath=str(filepath)
     score=converter.parse(filepath)
     flatscore=score.flatten()
     def notecount(flatscore):
@@ -100,7 +99,6 @@ def analyze(filepath):
         "meandistancebetweenchords": meanchorddis,
         "meantimebetweenchords": meantimedistance,
         "key": key,
-        "timesignature": timesignature,
         "timechanges": timesignaturechanges,
         "trillslength": trill_length,
         "avgtempo" : weighted_mean,
@@ -108,7 +106,6 @@ def analyze(filepath):
     }
 
 
-
-result=analyze('/Users/melodyqian/Documents/GitHub/pianocompetitionpredictions/total57/Bach_BWV_807_Allemande_English_Suite.mxl')
+result=analyze('/Users/melodyqian/Documents/GitHub/pianocompetitionpredictions/winnersample/Islamey_Op.18__Mily_Balakirev.mxl')
 
 print(result)
