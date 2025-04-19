@@ -106,6 +106,6 @@ def analyze(filepath):
     }
 
 
-result=analyze('/Users/melodyqian/Documents/GitHub/pianocompetitionpredictions/winnersample/Islamey_Op.18__Mily_Balakirev.mxl')
+result=analyze('')
 
 print(result)
